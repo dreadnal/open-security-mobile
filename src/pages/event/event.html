@@ -1,0 +1,27 @@
+<ion-content padding class="background">
+   <div class="page-title">Event details</div>
+   <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+      <ion-icon name='arrow-back'></ion-icon>
+   </button>
+   <div class="page-container">
+      <ion-list *ngIf="event">
+         <ion-item no-lines>
+            <ion-label>{{event.type.name}}</ion-label>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">Event time</ion-label>
+            <ion-input readonly="true" value="{{event.time}}"></ion-input>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">Sensor</ion-label>
+            <ion-input readonly="true" value="{{event.sensor.name}}"></ion-input>
+         </ion-item>
+         <button ion-item detail-none (click)="markAsRead()" *ngIf="event.state == 'new'">
+            <ion-label color="primary">Mark as read</ion-label>
+         </button>
+         <button ion-item detail-none (click)="markAsUnread()" *ngIf="event.state == 'read'">
+            <ion-label color="primary">Mark as unread</ion-label>
+         </button>
+      </ion-list>
+   </div>
+</ion-content>

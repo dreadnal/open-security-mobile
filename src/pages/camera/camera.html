@@ -1,0 +1,28 @@
+<ion-content padding class="background">
+   <div class="page-title">Camera details</div>
+   <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+      <ion-icon name='arrow-back'></ion-icon>
+   </button>
+   <div class="page-container">
+      <ion-list *ngIf="camera">
+         <ion-item no-lines>
+            <ion-label>{{camera.name}}</ion-label>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">Camera address</ion-label>
+            <ion-input readonly="true" value="{{camera.address}}"></ion-input>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">Area</ion-label>
+            <ion-input readonly="true" value="{{camera.area.name}}"></ion-input>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">Notes</ion-label>
+            <ion-textarea readonly="true" value="{{camera.note}}"></ion-textarea>
+         </ion-item>
+         <button ion-item detail-none (click)="goToCameraImage(camera._id)">
+            <ion-label color="primary">View camera image</ion-label>
+         </button>
+      </ion-list>
+   </div>
+</ion-content>

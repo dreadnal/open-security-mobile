@@ -1,0 +1,14 @@
+<ion-content padding class="background">
+   <div class="page-title">Cameras</div>
+   <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+      <ion-icon name='arrow-back'></ion-icon>
+   </button>
+   <div class="page-container">
+      <ion-list>
+         <ion-item *ngFor="let camera of cameras" (click)="goToCamera($event, camera)">
+            <h2>{{camera.name}}</h2>
+            <p>Area: {{camera.area.name}}</p>
+         </ion-item>
+      </ion-list>
+   </div>
+</ion-content>

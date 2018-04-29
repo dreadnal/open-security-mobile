@@ -1,0 +1,23 @@
+<ion-content padding class="background">
+   <div class="page-title">Events</div>
+   <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+      <ion-icon name='arrow-back'></ion-icon>
+   </button>
+   <div class="page-container">
+      <ion-segment [(ngModel)]="segment" color="dark" (ionChange)="segmentChanged($event)">
+         <ion-segment-button value="new">
+            New
+         </ion-segment-button>
+         <ion-segment-button value="read">
+            Read
+         </ion-segment-button>
+      </ion-segment>
+      <ion-list>
+         <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
+            <h2>{{event.type.name}}</h2>
+            <p>Sensor: {{event.sensor.name}}</p>
+            <p>{{event.time}}</p>
+         </ion-item>
+      </ion-list>
+   </div>
+</ion-content>

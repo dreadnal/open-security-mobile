@@ -1,0 +1,15 @@
+<ion-content padding class="background">
+   <div class="page-title">Sensors</div>
+   <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+      <ion-icon name='arrow-back'></ion-icon>
+   </button>
+   <div class="page-container">
+      <ion-list>
+         <ion-item *ngFor="let sensor of sensors" (click)="goToSensor($event, sensor)">
+            <h2>{{sensor.name}}</h2>
+            <p>Type: {{sensor.type.name}}</p>
+            <p>Area: {{sensor.area.name}}</p>
+         </ion-item>
+      </ion-list>
+   </div>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-content padding class="background">
+   <div class="page-title">Settings</div>
+   <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+      <ion-icon name='arrow-back'></ion-icon>
+   </button>
+   <div class="page-container">
+      <ion-list>
+         <ion-item>
+            <ion-label stacked color="primary">Server address</ion-label>
+            <ion-input type="text" [(ngModel)]="serverAddress" name="serverAddress"></ion-input>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">Test camera address</ion-label>
+            <ion-input type="text" [(ngModel)]="testCameraAddress" name="testCameraAddress"></ion-input>
+         </ion-item>
+         <ion-item>
+            <ion-label stacked color="primary">API key</ion-label>
+            <ion-input type="text" [(ngModel)]="apiKey" name="apiKey"></ion-input>
+         </ion-item>
+         <button ion-item detail-none (click)="save()">
+            <ion-label color="primary">Save</ion-label>
+         </button>
+         <button ion-item detail-none (click)="discardChanges()">
+            <ion-label color="primary">Discard changes</ion-label>
+         </button>
+      </ion-list>
+   </div>
+</ion-content>

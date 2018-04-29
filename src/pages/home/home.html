@@ -1,0 +1,46 @@
+<ion-content padding class="background">
+   <button [navPush]="settingsPage" ion-button color="light" clear icon-only class="btn btn-icon-only btn-settings">
+      <ion-icon name='settings'></ion-icon>
+   </button>
+   <div class="title-text">
+      Open Security
+   </div>
+   <button ion-button color="light" clear icon-only class="btn btn-big btn-lock" (click)="disableSystem()" *ngIf="setting && setting.value == 'true'">
+      <div>
+         <ion-icon name="md-lock" style="font-size: 9em"></ion-icon>
+         <label style="display: block; padding-top: 3vh;">System enabled</label>
+      </div>
+   </button>
+   <button ion-button color="light" clear icon-only class="btn btn-big btn-lock" (click)="enableSystem()" *ngIf="setting == undefined || setting.value != 'true'">
+      <div>
+         <ion-icon name="md-unlock" style="font-size: 9em"></ion-icon>
+         <label style="display: block; padding-top: 3vh;">System disabled</label>
+      </div>
+   </button>
+   <div class="bottom-bar">
+      <button [navPush]="eventsPage" ion-button clear color="dark" class="btn btn-icon-only btn-one">
+         <div>
+            <ion-icon name="alert" style="font-size: 2em"></ion-icon>
+            <label style="display: block; font-size: 0.6em">Events</label>
+         </div>
+      </button>
+      <button [navPush]="liveModePage" ion-button clear color="dark" class="btn btn-icon-only btn-two">
+         <div>
+            <ion-icon name="cube" style="font-size: 2em"></ion-icon>
+            <label style="display: block; font-size: 0.6em">3D mode</label>
+         </div>
+      </button>
+      <button [navPush]="camerasPage" ion-button clear color="dark" class="btn btn-icon-only btn-three">
+         <div>
+            <ion-icon name="videocam" style="font-size: 2em"></ion-icon>
+            <label style="display: block; font-size: 0.6em">Cameras</label>
+         </div>
+      </button>
+      <button [navPush]="sensorsPage" ion-button clear color="dark" class="btn btn-icon-only btn-four">
+         <div>
+            <ion-icon name="eye" style="font-size: 2em"></ion-icon>
+            <label style="display: block; font-size: 0.6em">Sensors</label>
+         </div>
+      </button>
+   </div>
+</ion-content>
