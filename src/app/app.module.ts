@@ -13,7 +13,7 @@ import { CameraPage } from '../pages/camera/camera';
 import { CamerasPage } from '../pages/cameras/cameras';
 import { EventPage } from '../pages/event/event';
 import { EventsPage } from '../pages/events/events';
-import { LiveModePage } from '../pages/live-mode/live-mode';
+import { MainPage } from '../pages/main/main';
 import { SensorPage } from '../pages/sensor/sensor';
 import { SensorsPage } from '../pages/sensors/sensors';
 import { SettingsPage } from '../pages/settings/settings';
@@ -25,8 +25,8 @@ import { FloorServiceProvider } from '../providers/floor-service/floor-service';
 import { SensorServiceProvider } from '../providers/sensor-service/sensor-service';
 import { SensorTypeServiceProvider } from '../providers/sensor-type-service/sensor-type-service';
 import { VisibilityServiceProvider } from '../providers/visibility-service/visibility-service';
-import { ThreeSceneComponent } from '../components/three-scene/three-scene'
 import { SettingServiceProvider } from '../providers/setting-service/setting-service';
+import { DeviceServiceProvider } from '../providers/device-service/device-service';
 
 
 @NgModule({
@@ -37,11 +37,10 @@ import { SettingServiceProvider } from '../providers/setting-service/setting-ser
     CamerasPage,
     EventPage,
     EventsPage,
-    LiveModePage,
+    MainPage,
     SensorPage,
     SensorsPage,
-    SettingsPage,
-    ThreeSceneComponent
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -57,11 +56,10 @@ import { SettingServiceProvider } from '../providers/setting-service/setting-ser
     CamerasPage,
     EventPage,
     EventsPage,
-    LiveModePage,
+    MainPage,
     SensorPage,
     SensorsPage,
-    SettingsPage,
-    ThreeSceneComponent
+    SettingsPage
   ],
   providers: [
     StatusBar,
@@ -75,7 +73,8 @@ import { SettingServiceProvider } from '../providers/setting-service/setting-ser
     SensorServiceProvider,
     SensorTypeServiceProvider,
     VisibilityServiceProvider,
-    SettingServiceProvider
+    SettingServiceProvider,
+    DeviceServiceProvider
   ]
 })
 export class AppModule {}

@@ -5,23 +5,16 @@
    </button>
    <div class="page-container">
       <ion-list>
-         <ion-item>
-            <ion-label stacked color="primary">Server address</ion-label>
-            <ion-input type="text" [(ngModel)]="serverAddress" name="serverAddress"></ion-input>
-         </ion-item>
-         <ion-item>
-            <ion-label stacked color="primary">Test camera address</ion-label>
-            <ion-input type="text" [(ngModel)]="testCameraAddress" name="testCameraAddress"></ion-input>
-         </ion-item>
-         <ion-item>
-            <ion-label stacked color="primary">API key</ion-label>
-            <ion-input type="text" [(ngModel)]="apiKey" name="apiKey"></ion-input>
-         </ion-item>
-         <button ion-item detail-none (click)="save()">
-            <ion-label color="primary">Save</ion-label>
-         </button>
-         <button ion-item detail-none (click)="discardChanges()">
-            <ion-label color="primary">Discard changes</ion-label>
+        <ion-item>
+           <ion-label stacked color="primary">Device name:</ion-label>
+           <ion-label> {{ device_name }} </ion-label>
+        </ion-item>
+        <ion-item>
+           <ion-label stacked color="primary">Server address:</ion-label>
+           <ion-label> {{ server_address }} </ion-label>
+        </ion-item>
+         <button ion-item detail-none (click)="logout()">
+            <ion-label color="primary">Logout</ion-label>
          </button>
       </ion-list>
    </div>

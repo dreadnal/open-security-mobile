@@ -1,71 +1,54 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
-   selector: 'page-settings',
-   templateUrl: 'settings.html',
+  selector: 'page-settings',
+  templateUrl: 'settings.html',
 })
 export class SettingsPage {
 
-   public serverAddress: String
-   public testCameraAddress: String
-   public apiKey: String
-   constructor(public navCtrl: NavController, public navParams: NavParams,
+  public server_address: String;
+  public device_name: String;
+
+  public homePage = HomePage;
+
+  ionViewWillEnter() {
+    this.storage.get('verified').then((val) => {
+      if (val && val == true) {
+        this.fetch();
+      } else {
+        this.logout();
+      }
+    });
+  }
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
       public storage: Storage) {
-      storage.get('serverAddress').then((val) => {
-         if (val) {
-            this.serverAddress = val;
-         } else {
-            this.serverAddress = "";
-         }
-      });
-      storage.get('testCameraAddress').then((val) => {
-         if (val) {
-            this.testCameraAddress = val;
-         } else {
-            this.testCameraAddress = "";
-         }
-      });
-      storage.get('apiKey').then((val) => {
-         if (val) {
-            this.apiKey = val;
-         } else {
-            this.apiKey = "";
-         }
-      });
-   }
+  }
 
-   public discardChanges() {
-      this.storage.get('serverAddress').then((val) => {
-         if (val) {
-            this.serverAddress = val;
-         } else {
-            this.serverAddress = "";
-         }
-      });
-      this.storage.get('testCameraAddress').then((val) => {
-         if (val) {
-            this.testCameraAddress = val;
-         } else {
-            this.testCameraAddress = "";
-         }
-      });
-      this.storage.get('apiKey').then((val) => {
-         if (val) {
-            this.apiKey = val;
-         } else {
-            this.apiKey = "";
-         }
-      });
-   }
+  private fetch() {
+    this.storage.get('server_address').then((val) => {
+      if (val) {
+        this.server_address = val;
+      } else {
+        this.server_address = "";
+      }
+    });
+    this.storage.get('device_name').then((val) => {
+      if (val) {
+        this.device_name = val;
+      } else {
+        this.device_name = "";
+      }
+    });
+  }
 
-   public save() {
-      this.storage.set('serverAddress', this.serverAddress);
-      this.storage.set('testCameraAddress', this.testCameraAddress);
-      this.storage.set('apiKey', this.apiKey);
-      this.storage.set('serverAddressWithKey', this.serverAddress + '/' + this.apiKey);
-   }
+  public logout() {
+    this.storage.clear();
+    this.navCtrl.setRoot(this.homePage);
+  }
 
 }

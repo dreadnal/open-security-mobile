@@ -1,99 +1,99 @@
 import { AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CamerasPage } from '../cameras/cameras';
-import { EventsPage } from '../events/events';
-import { LiveModePage } from '../live-mode/live-mode';
-import { SensorsPage } from '../sensors/sensors';
-import { SettingsPage } from '../settings/settings';
-import { SettingServiceProvider } from '../../providers/setting-service/setting-service'
 import { Storage } from '@ionic/storage';
+import { MainPage } from '../main/main';
+import { DeviceServiceProvider } from '../../providers/device-service/device-service';
 
 @Component({
-   selector: 'page-home',
-   templateUrl: 'home.html'
+  selector: 'page-home',
+  templateUrl: 'home.html',
+  providers: [DeviceServiceProvider]
 })
 export class HomePage {
 
-   camerasPage = CamerasPage;
-   eventsPage = EventsPage;
-   liveModePage = LiveModePage;
-   sensorsPage = SensorsPage;
-   settingsPage = SettingsPage;
+  _buttonText = 'Verify device';
+  _buttonIsDisabled = false;
 
-   public setting: any;
-   public authResonse: any;
+  mainPage = MainPage;
 
-   ionViewWillEnter() {
-      this.storage.get('serverAddressWithKey').then((val) => {
-         if (val) {
-            this.serverAddress = val;
-         } else {
-            this.serverAddress = "";
-         }
-         this.loadSystemEnabled();
-         this.checkSystem();
-      });
-   }
+  public address: String;
+  public id: String;
+  public one_time_password: String;
+  
 
-   public serverAddress: String
-   constructor(public navCtrl: NavController, public navParams: NavParams,
-      public settingServiceProvider: SettingServiceProvider, public storage: Storage,
-      public alertController: AlertController) {
+  ionViewWillEnter() {
+    this.storage.get('verified').then((val) => {
+      if (val && val == true) {
+        this.navCtrl.setRoot(this.mainPage);
+      }
+    });
+  }
 
-   }
+  public serverAddress: String
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public deviceServiceProvider: DeviceServiceProvider,
+    public storage: Storage, public alertController: AlertController) {
+  }
 
-   loadSystemEnabled() {
-      this.settingServiceProvider.get(this.serverAddress, 'systemEnabled')
-         .then(data => {
-            this.setting = data[0];
-         });
-   }
+  public async verify() {
+    this._buttonText = 'Verifying device...';
+    this._buttonIsDisabled = true;
+    this.deviceServiceProvider.verify(this.address, this.id, this.one_time_password).then(
+      data => {
+        this.login(this.address, data);
+      },
+      error => {
+        switch(error.status) {
+          case 404 :
+          case 403 : {
+            this.alertVerificationFailed();
+            break;
+          }
+          case 0 :
+          default : {
+            this.alertConnectionFailed();
+            break;
+          }
+        }
+        this._buttonText = 'Verify device';
+        this._buttonIsDisabled = false;
+      }
+    );
+  }
 
-   checkSystem() {
-      this.settingServiceProvider.check(this.serverAddress)
-         .then(data => {
-            this.authResonse = data;
-            if (!this.authResonse.connect) {
-               this.alertConnectionError();
-               return;
-            }
-            if (!this.authResonse.auth) {
-               this.alertAuthError();
-               return;
-            }
-         })
-   }
+  private login(server_address: any, data: any) {
+    this.storage.set('api_key', data['api_key']);
+    this.storage.set('device_name', data['device_name']);
+    this.storage.set('server_address', server_address);
+    this.storage.set('verified', true);
+    this.navCtrl.setRoot(this.mainPage);
+  }
 
-   public enableSystem() {
-      this.settingServiceProvider.enable(this.serverAddress, 'systemEnabled')
-         .then(data => {
-            this.setting = data;
-         });
-   }
+  private alertUnexpectedError(status: Number) {
+    let alert = this.alertController.create({
+      title: 'Error',
+      subTitle: 'Unexpected error - ' + status,
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
-   public disableSystem() {
-      this.settingServiceProvider.disable(this.serverAddress, 'systemEnabled')
-         .then(data => {
-            this.setting = data;
-         });
-   }
+  private alertConnectionFailed() {
+    let alert = this.alertController.create({
+      title: 'Error',
+      subTitle: 'Failed to connect server.',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
-   public alertConnectionError() {
-      let alert = this.alertController.create({
-         title: 'Connection error',
-         subTitle: 'Failed to connect to server.',
-         buttons: ['Dismiss']
-      });
-      alert.present();
-   }
-
-   public alertAuthError() {
-      let alert = this.alertController.create({
-         title: 'Authentication error',
-         subTitle: 'Failed verify application. Please check API key in settings.',
-         buttons: ['Dismiss']
-      });
-      alert.present();
-   }
+  private alertVerificationFailed() {
+    let alert = this.alertController.create({
+      title: 'Error',
+      subTitle: 'Device verification failed.',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  } 
 }

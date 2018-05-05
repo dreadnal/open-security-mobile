@@ -1,46 +1,26 @@
 <ion-content padding class="background">
-   <button [navPush]="settingsPage" ion-button color="light" clear icon-only class="btn btn-icon-only btn-settings">
-      <ion-icon name='settings'></ion-icon>
-   </button>
-   <div class="title-text">
-      Open Security
-   </div>
-   <button ion-button color="light" clear icon-only class="btn btn-big btn-lock" (click)="disableSystem()" *ngIf="setting && setting.value == 'true'">
-      <div>
-         <ion-icon name="md-lock" style="font-size: 9em"></ion-icon>
-         <label style="display: block; padding-top: 3vh;">System enabled</label>
-      </div>
-   </button>
-   <button ion-button color="light" clear icon-only class="btn btn-big btn-lock" (click)="enableSystem()" *ngIf="setting == undefined || setting.value != 'true'">
-      <div>
-         <ion-icon name="md-unlock" style="font-size: 9em"></ion-icon>
-         <label style="display: block; padding-top: 3vh;">System disabled</label>
-      </div>
-   </button>
-   <div class="bottom-bar">
-      <button [navPush]="eventsPage" ion-button clear color="dark" class="btn btn-icon-only btn-one">
-         <div>
-            <ion-icon name="alert" style="font-size: 2em"></ion-icon>
-            <label style="display: block; font-size: 0.6em">Events</label>
-         </div>
+
+  <div class="title-text">
+    Open Security
+  </div>
+
+  <div class="login-container">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked color="primary">Server address</ion-label>
+        <ion-input type="text" [(ngModel)]="address" name="address" placeholder="Exapmle: http://localhost:3000"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked color="primary">Device ID</ion-label>
+        <ion-input type="text" [(ngModel)]="id" name="id"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked color="primary">One time password:</ion-label>
+        <ion-input type="password" [(ngModel)]="one_time_password" name="one_time_password"></ion-input>
+      </ion-item>
+      <button ion-item detail-none (click)="verify()" [disabled]="_buttonIsDisabled">
+        <ion-label color="primary"> {{ _buttonText }} </ion-label>
       </button>
-      <button [navPush]="liveModePage" ion-button clear color="dark" class="btn btn-icon-only btn-two">
-         <div>
-            <ion-icon name="cube" style="font-size: 2em"></ion-icon>
-            <label style="display: block; font-size: 0.6em">3D mode</label>
-         </div>
-      </button>
-      <button [navPush]="camerasPage" ion-button clear color="dark" class="btn btn-icon-only btn-three">
-         <div>
-            <ion-icon name="videocam" style="font-size: 2em"></ion-icon>
-            <label style="display: block; font-size: 0.6em">Cameras</label>
-         </div>
-      </button>
-      <button [navPush]="sensorsPage" ion-button clear color="dark" class="btn btn-icon-only btn-four">
-         <div>
-            <ion-icon name="eye" style="font-size: 2em"></ion-icon>
-            <label style="display: block; font-size: 0.6em">Sensors</label>
-         </div>
-      </button>
-   </div>
+    </ion-list>
+  </div>
 </ion-content>
