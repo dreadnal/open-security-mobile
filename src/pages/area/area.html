@@ -1,0 +1,74 @@
+<ion-content padding class="background">
+  <div class="page-title">Area details</div>
+  <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+    <ion-icon name='arrow-back'></ion-icon>
+  </button>
+  <div class="page-container">
+    <div class="content" *ngIf="area">
+      <h1> {{ area.name }} </h1>
+      <p> Floor: {{ area.floor.name }} </p>
+      <ion-card class="primary">
+        <ion-card-header>
+          Unread events
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
+              <h2>{{event.type.name}}</h2>
+              <p>Sensor: {{event.sensor.name}}</p>
+              <p>{{event.time}}</p>
+            </ion-item>
+            <ion-item *ngIf="!(events && events.length > 0)">
+              <p>No unread events found at area</p>
+            </ion-item>
+          </ion-list>
+          <button ion-button color="secondary" block outline (click)="verify()" [disabled]="_buttonIsDisabled">
+            <ion-label> View all events </ion-label>
+          </button>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card>
+        <ion-card-header>
+          Sensors
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
+              <h2>{{event.type.name}}</h2>
+              <p>Sensor: {{event.sensor.name}}</p>
+              <p>{{event.time}}</p>
+            </ion-item>
+            <ion-item *ngIf="!(events && events.length > 0)">
+              <p>No sensors found at area</p>
+            </ion-item>
+          </ion-list>
+          <button ion-button color="secondary" block outline (click)="verify()" [disabled]="_buttonIsDisabled">
+            <ion-label> View all sensors </ion-label>
+          </button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          Cameras
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
+              <h2>{{event.type.name}}</h2>
+              <p>Sensor: {{event.sensor.name}}</p>
+              <p>{{event.time}}</p>
+            </ion-item>
+            <ion-item *ngIf="!(events && events.length > 0)">
+              <p>No cameras found at area</p>
+            </ion-item>
+          </ion-list>
+          <button ion-button color="secondary" block outline (click)="verify()" [disabled]="_buttonIsDisabled">
+            <ion-label> View all cameras </ion-label>
+          </button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

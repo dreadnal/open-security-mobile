@@ -27,17 +27,24 @@ import { SensorTypeServiceProvider } from '../providers/sensor-type-service/sens
 import { VisibilityServiceProvider } from '../providers/visibility-service/visibility-service';
 import { SettingServiceProvider } from '../providers/setting-service/setting-service';
 import { DeviceServiceProvider } from '../providers/device-service/device-service';
+import { CommonServiceProvider } from '../providers/common-service/common-service';
+import { ReconnectPage } from '../pages/reconnect/reconnect';
+import { AreasPage } from '../pages/areas/areas';
+import { AreaPage } from '../pages/area/area';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    AreaPage,
+    AreasPage,
     CameraPage,
     CamerasPage,
     EventPage,
     EventsPage,
     MainPage,
+    ReconnectPage,
     SensorPage,
     SensorsPage,
     SettingsPage
@@ -51,12 +58,15 @@ import { DeviceServiceProvider } from '../providers/device-service/device-servic
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AreaPage,
+    AreasPage,
     HomePage,
     CameraPage,
     CamerasPage,
     EventPage,
     EventsPage,
     MainPage,
+    ReconnectPage,
     SensorPage,
     SensorsPage,
     SettingsPage
@@ -74,7 +84,10 @@ import { DeviceServiceProvider } from '../providers/device-service/device-servic
     SensorTypeServiceProvider,
     VisibilityServiceProvider,
     SettingServiceProvider,
-    DeviceServiceProvider
+    DeviceServiceProvider,
+    CommonServiceProvider,
+    FloorServiceProvider,
+    AreaServiceProvider
   ]
 })
 export class AppModule {}

@@ -24,25 +24,19 @@
             <label style="display: block; font-size: 0.6em">Events</label>
          </div>
       </button>
-      <button (click)="logout()" ion-button clear color="dark" class="btn btn-icon-only btn-two">
-         <div>
-            <ion-icon name="cube" style="font-size: 2em"></ion-icon>
-            <label style="display: block; font-size: 0.6em">Floors</label>
-         </div>
-      </button>
-      <button (click)="logout()" ion-button clear color="dark" class="btn btn-icon-only btn-three">
+      <button [navPush]="areasPage" ion-button clear color="dark" class="btn btn-icon-only btn-two">
          <div>
             <ion-icon name="cube" style="font-size: 2em"></ion-icon>
             <label style="display: block; font-size: 0.6em">Areas</label>
          </div>
       </button>
-      <button [navPush]="camerasPage" ion-button clear color="dark" class="btn btn-icon-only btn-four">
+      <button [navPush]="camerasPage" ion-button clear color="dark" class="btn btn-icon-only btn-three">
          <div>
             <ion-icon name="videocam" style="font-size: 2em"></ion-icon>
             <label style="display: block; font-size: 0.6em">Cameras</label>
          </div>
       </button>
-      <button [navPush]="sensorsPage" ion-button clear color="dark" class="btn btn-icon-only btn-five">
+      <button [navPush]="sensorsPage" ion-button clear color="dark" class="btn btn-icon-only btn-four">
          <div>
             <ion-icon name="eye" style="font-size: 2em"></ion-icon>
             <label style="display: block; font-size: 0.6em">Sensors</label>

@@ -8,7 +8,7 @@
     <ion-list>
       <ion-item>
         <ion-label stacked color="primary">Server address</ion-label>
-        <ion-input type="text" [(ngModel)]="address" name="address" placeholder="Exapmle: http://localhost:3000"></ion-input>
+        <ion-input type="text" [(ngModel)]="address" name="address" placeholder="Exapmle: http://127.0.0.1:3000"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked color="primary">Device ID</ion-label>
@@ -18,9 +18,11 @@
         <ion-label stacked color="primary">One time password:</ion-label>
         <ion-input type="password" [(ngModel)]="one_time_password" name="one_time_password"></ion-input>
       </ion-item>
-      <button ion-item detail-none (click)="verify()" [disabled]="_buttonIsDisabled">
-        <ion-label color="primary"> {{ _buttonText }} </ion-label>
-      </button>
+      <ion-item></ion-item>
     </ion-list>
+    <button ion-button icon-start color="secondary" block outline (click)="verify()" [disabled]="_buttonIsDisabled">
+      <ion-icon name="key"></ion-icon>
+      <ion-label> {{ _buttonText }} </ion-label>
+    </button>
   </div>
 </ion-content>

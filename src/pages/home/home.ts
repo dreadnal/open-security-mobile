@@ -1,6 +1,6 @@
 import { AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MainPage } from '../main/main';
 import { DeviceServiceProvider } from '../../providers/device-service/device-service';
@@ -15,13 +15,12 @@ export class HomePage {
   _buttonText = 'Verify device';
   _buttonIsDisabled = false;
 
-  mainPage = MainPage;
-
   public address: String;
   public id: String;
   public one_time_password: String;
-  
 
+  private mainPage = MainPage;
+  
   ionViewWillEnter() {
     this.storage.get('verified').then((val) => {
       if (val && val == true) {
@@ -30,13 +29,12 @@ export class HomePage {
     });
   }
 
-  public serverAddress: String
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public deviceServiceProvider: DeviceServiceProvider,
-    public storage: Storage, public alertController: AlertController) {
+  constructor(private navCtrl: NavController,
+    private deviceServiceProvider: DeviceServiceProvider,
+    private storage: Storage, private alertController: AlertController) {
   }
 
-  public async verify() {
+  public verify() {
     this._buttonText = 'Verifying device...';
     this._buttonIsDisabled = true;
     this.deviceServiceProvider.verify(this.address, this.id, this.one_time_password).then(
@@ -68,15 +66,6 @@ export class HomePage {
     this.storage.set('server_address', server_address);
     this.storage.set('verified', true);
     this.navCtrl.setRoot(this.mainPage);
-  }
-
-  private alertUnexpectedError(status: Number) {
-    let alert = this.alertController.create({
-      title: 'Error',
-      subTitle: 'Unexpected error - ' + status,
-      buttons: ['Dismiss']
-    });
-    alert.present();
   }
 
   private alertConnectionFailed() {

@@ -1,32 +1,51 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Http, Headers } from '@angular/http';
+
 
 @Injectable()
 export class FloorServiceProvider {
 
-   constructor(public http: Http) {
+  constructor(private http: Http) {
 
-   }
+  }
 
-   getAll(serverAddress: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/floors')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
+  getAll(address: string, api_key: string) {
+
+    var uri = address + '/floors/';
+
+    var headers = new Headers();
+    headers.append('Authorization', api_key);
+
+     return new Promise((resolve, reject) => {
+        this.http.get(uri, {headers: headers})
+           .timeout(10000) 
+           .subscribe(res => {
+              console.log(res);
+              let data = res.json();
+              resolve(data);
+            }, (err) => {
+              reject(err);
             });
-      });
-   }
+     });
+  }
 
-   get(serverAddress: String, floorId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/floors/' + floorId)
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
+  get(address: string, api_key: string, floor_id: Number) {
+
+    var uri = address + '/floors/' + floor_id;
+
+    var headers = new Headers();
+    headers.append('Authorization', api_key);
+
+     return new Promise((resolve, reject) => {
+        this.http.get(uri, {headers: headers})
+           .timeout(10000) 
+           .subscribe(res => {
+              let data = res.json();
+              resolve(data);
+            }, (err) => {
+              reject(err);
             });
-      });
-   }
+     });
+  }
 
 }

@@ -1,5 +1,5 @@
 .background {
-   background: linear-gradient(180deg, rgb(5, 94, 88), rgb(245, 114, 33))
+   background: linear-gradient(180deg, color($colors, primary), color($colors, secondary))
 }
 
 .page-container {
@@ -10,6 +10,8 @@
    height: 90vh;
    background-color: white;
    overflow-y: scroll;
+   border-radius: 3vh 3vh 0 0;
+   padding-top: 3vh;
 }
 
 .page-title {
@@ -36,4 +38,42 @@
 .btn-back {
    left: 5vw;
    top: 2vh;
+}
+
+.accordion-list {
+    background: color($colors, light);
+    //height: 100%;
+}
+.accordion-list .section {
+    background: #fff;
+    color: #000;
+    margin-bottom: 0px;
+}
+
+.accordion-list .section-active {
+    background: rgb(245, 114, 33);
+    color: #fff;
+}
+
+.accordion-list .child {
+    color: #000;
+    background: color($colors, light);
+    padding: 10px;
+}
+
+.accordion-list .child-item{
+    background: color($colors, light);
+}
+
+.accordion-list .label {
+    margin: 0;
+}
+
+.accordion-list .list,
+.accordion-list .list .list-header {
+    margin-bottom: 0;
+}
+
+.accordion-list .list-header {
+    margin-bottom: 0.5vh;
 }

@@ -1,0 +1,31 @@
+<ion-content padding class="background">
+  <div class="page-title">Areas</div>
+  <button navPop ion-button color="light" clear icon-only class="btn btn-icon-only btn-back">
+    <ion-icon name='arrow-back'></ion-icon>
+  </button>
+  <div class="page-container">
+    <ion-list class="accordion-list">
+      <ion-list-header *ngFor="let floor of floors; let i = index" no-lines no-padding>
+        <button ion-item (click)="toggleFloor(i)" detail-none [ngClass]="{'section-active': floor.open, 'section': !floor.open}">
+            <ion-icon item-left name="md-arrow-dropright" *ngIf="!floor.open"></ion-icon>
+            <ion-icon item-left name="md-arrow-dropdown" *ngIf="floor.open"></ion-icon>
+          {{ floor.name }}
+        </button>
+           
+        <ion-list *ngIf="floor.open" no-lines>
+          <ion-list-header *ngFor="let area of floor.areas; let j = index" no-padding>   
+            <ion-item ion-item detail-none class="child-item" text-wrap (click)="navigateArea(area)">
+              <h2>{{ area.name }}</h2>
+              <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+            </ion-item>
+          </ion-list-header>
+          <ion-list-header *ngIf="!(floor.areas && floor.areas.length > 0)" no-padding>   
+            <ion-item class="child-item">
+              <p>No areas found!</p>
+            </ion-item>
+          </ion-list-header>
+        </ion-list>
+      </ion-list-header>
+    </ion-list>
+  </div>
+</ion-content>

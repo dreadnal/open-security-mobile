@@ -1,43 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Http, Headers } from '@angular/http';
+
 
 @Injectable()
 export class AreaServiceProvider {
 
-   public serverAddress: String
-   constructor(public http: Http) {
-      
-   }
+  constructor(private http: Http) {
 
-   getAll(serverAddress: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/areas')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
+  }
 
-   getByFloor(serverAddress: String, floorId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/floors/' + floorId + '/areas')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
+  getAll(address: string, api_key: string) {
 
-   get(serverAddress: String, areaId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/areas/' + areaId)
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
+    var uri = address + '/areas/';
+
+    var headers = new Headers();
+    headers.append('Authorization', api_key);
+
+     return new Promise((resolve, reject) => {
+        this.http.get(uri, {headers: headers})
+           .timeout(10000) 
+           .subscribe(res => {
+              let data = res.json();
+              resolve(data);
+            }, (err) => {
+              reject(err);
             });
-      });
-   }
+     });
+  }
+
+  get(address: string, api_key: string, area_id: Number) {
+    
+    var uri = address + '/areas/' + area_id;
+
+    var headers = new Headers();
+    headers.append('Authorization', api_key);
+
+     return new Promise((resolve, reject) => {
+        this.http.get(uri, {headers: headers})
+           .timeout(10000) 
+           .subscribe(res => {
+              let data = res.json();
+              resolve(data);
+            }, (err) => {
+              reject(err);
+            });
+     });
+  }
 
 }
