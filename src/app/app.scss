@@ -11,7 +11,6 @@
    background-color: white;
    overflow-y: scroll;
    border-radius: 3vh 3vh 0 0;
-   padding-top: 3vh;
 }
 
 .page-title {
@@ -25,9 +24,9 @@
 }
 
 .btn {
-   position: absolute;
-   width: 12vw;
-   height: 6vh;
+  position: absolute;
+  width: 12vw;
+  height: 6vh;
 }
 
 .btn-big {
@@ -42,11 +41,10 @@
 
 .accordion-list {
     background: color($colors, light);
-    //height: 100%;
 }
 .accordion-list .section {
     background: #fff;
-    color: #000;
+    color: #222;
     margin-bottom: 0px;
 }
 
@@ -56,13 +54,14 @@
 }
 
 .accordion-list .child {
-    color: #000;
+    color: #222;
     background: color($colors, light);
     padding: 10px;
 }
 
 .accordion-list .child-item{
     background: color($colors, light);
+    color: #222;
 }
 
 .accordion-list .label {

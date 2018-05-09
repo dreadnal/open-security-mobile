@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -9,94 +9,23 @@ export class EventServiceProvider {
 
    }
 
-   getAll(serverAddress: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/events')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
+   getUnreadByArea(address: string, api_key: string, area_id: Number) {
 
-   getNew(serverAddress: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/events/new')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   getRead(serverAddress: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/events/read')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   getByArea(serverAddress: String, areaId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/areas/' + areaId + '/events')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   getByType(serverAddress: String, eventTypeId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/eventTypes/' + eventTypeId + '/events')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   getBySensor(serverAddress: String, sensorId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/sensors/' + sensorId + '/events')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   get(serverAddress: String, eventId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/events/' + eventId)
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   markAsRead(serverAddress: String, eventId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/events/' + eventId + '/markAsRead')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
-
-   markAsUnread(serverAddress: String, eventId: String) {
-      return new Promise(resolve => {
-         this.http.get(serverAddress + '/events/' + eventId + '/markAsUnread')
-            .map(res => res.json())
-            .subscribe(data => {
-               resolve(data);
-            });
-      });
-   }
+      var uri = address + '/areas/' + area_id + '/events/unread';
+  
+      var headers = new Headers();
+      headers.append('Authorization', api_key);
+  
+       return new Promise((resolve, reject) => {
+          this.http.get(uri, {headers: headers})
+             .timeout(10000) 
+             .subscribe(res => {
+                let data = res.json();
+                resolve(data);
+              }, (err) => {
+                reject(err);
+              });
+       });
+    }
 
 }

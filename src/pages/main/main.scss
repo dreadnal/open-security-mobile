@@ -1,49 +1,54 @@
-.bottom-bar {
-   position: absolute;
-   bottom: 0;
-   left: 0;
-   width: 100vw;
-   height: 15vh;
-   border-radius: 3vh 3vh 0 0;
-   background-color: white;
-}
-
 .btn-settings {
-   right: 5vw;
-   top: 2vh;
-}
-
-.btn-lock {
-   left: 33vw;
-   top: 45vh;
-}
-
-.btn-one {
-   left: 14vw;
-   top: 5vh;
-}
-
-.btn-two {
-   left: 34vw;
-   top: 5vh;
-}
-
-.btn-three {
-   left: 54vw;
-   top: 5vh;
-}
-
-.btn-four {
-   left: 74vw;
-   top: 5vh;
+  right: 16px;
+  top: 16px;
 }
 
 .title-text {
-   position: absolute;
-   top: 20vh;
-   left: 0;
-   width: 100vw;
-   font-size: 3em;
-   text-align: center;
-   color: white;
+  position: absolute;
+  top: 20vh;
+  left: 0;
+  width: 100vw;
+  font-size: 3em;
+  text-align: center;
+  color: white;
+}
+
+.btn-lock {
+  left: 0;
+  width: 100vw;
+  top: 45vh;
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 72px;
+  border-radius: 18px 18px 0 0;
+  background-color: white;
+}
+
+.btn-one {
+  left: 14vw;
+  bottom: 0;
+  height: 60px;
+}
+
+.btn-two {
+  left: 34vw;
+  bottom: 0;
+  height: 60px;
+}
+
+.btn-three {
+  left: 54vw;
+  bottom: 0;
+  height: 60px;
+}
+
+.btn-four {
+  left: 74vw;
+  bottom: 0;
+  height: 60px;
 }

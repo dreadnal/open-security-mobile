@@ -14,9 +14,10 @@
         <ion-card-content>
           <ion-list>
             <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
-              <h2>{{event.type.name}}</h2>
+              <ion-icon item-start name="{{event.event_type.icon}}"></ion-icon>
+              <h2>{{event.event_type.name}}</h2>
               <p>Sensor: {{event.sensor.name}}</p>
-              <p>{{event.time}}</p>
+              <p>{{event.created_at}}</p>
             </ion-item>
             <ion-item *ngIf="!(events && events.length > 0)">
               <p>No unread events found at area</p>
@@ -34,17 +35,17 @@
         </ion-card-header>
         <ion-card-content>
           <ion-list>
-            <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
-              <h2>{{event.type.name}}</h2>
-              <p>Sensor: {{event.sensor.name}}</p>
-              <p>{{event.time}}</p>
+            <ion-item *ngFor="let sensor of sensors" (click)="navigateEvent(event)">
+              <h2>{{sensor.type.name}}</h2>
+              <p>Sensor: {{sensor.sensor.name}}</p>
+              <p>{{sensor.time}}</p>
             </ion-item>
-            <ion-item *ngIf="!(events && events.length > 0)">
+            <ion-item *ngIf="!(sensors && sensors.length > 0)">
               <p>No sensors found at area</p>
             </ion-item>
           </ion-list>
           <button ion-button color="secondary" block outline (click)="verify()" [disabled]="_buttonIsDisabled">
-            <ion-label> View all sensors </ion-label>
+            <ion-label>View all sensors</ion-label>
           </button>
         </ion-card-content>
       </ion-card>
@@ -55,10 +56,10 @@
         </ion-card-header>
         <ion-card-content>
           <ion-list>
-            <ion-item *ngFor="let event of events" (click)="goToEvent(event)">
+            <ion-item *ngFor="let camera of cameras" (click)="navigateCamera(camera)">
               <h2>{{event.type.name}}</h2>
               <p>Sensor: {{event.sensor.name}}</p>
-              <p>{{event.time}}</p>
+              <p>{{event.created_on}}</p>
             </ion-item>
             <ion-item *ngIf="!(events && events.length > 0)">
               <p>No cameras found at area</p>
